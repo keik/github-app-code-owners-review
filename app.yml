@@ -8,6 +8,8 @@ default_permissions:
   members: read
   single_file: read
 
+single_file_name: .github/CODEOWNERS
+
 name: Code Owners review
 
 url: https://github.com/keik/github-app-code-owners-review

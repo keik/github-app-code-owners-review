@@ -4,24 +4,14 @@ import { Context } from "probot";
 export const getCodeownersFileContent = async (
   context: Context<EventPayloads.WebhookPayloadPullRequest>
 ): Promise<string> => {
-  const codeownersFilepaths = [
-    ".github/CODEOWNERS",
-    "CODEOWNERS",
-    "doc/CODEOWNES",
-  ];
-
-  for (const path of codeownersFilepaths) {
-    try {
-      return Buffer.from(
-        (await context.github.repos.getContent(context.repo({ path }))).data
-          .content,
-        "base64"
-      ).toString();
-    } catch (e) {
-      // next
-    }
-  }
-  throw new Error("CODEOWNERS file not found.");
+  return Buffer.from(
+    (
+      await context.github.repos.getContent(
+        context.repo({ path: ".github/CODEOWNERS" })
+      )
+    ).data.content,
+    "base64"
+  ).toString();
 };
 
 export const getChangedFilepaths = async (
