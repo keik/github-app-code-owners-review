@@ -67,7 +67,7 @@ const check = async (
 
   context.github.checks.create(
     context.repo({
-      name: "review-from-code-owners",
+      name: "code-owners-review",
       head_branch: "",
       head_sha: pullRequest.head.sha,
       status: "completed",

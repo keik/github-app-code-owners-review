@@ -8,9 +8,9 @@ default_permissions:
   members: read
   single_file: read
 
-name: Review from code owners
+name: Code Owners review
 
-url: https://github.com/keik/require-review-from-code-owners
+url: https://github.com/keik/github-app-code-owners-review
 
 description: Require review from code owners.
 

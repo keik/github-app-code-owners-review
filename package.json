@@ -1,9 +1,9 @@
 {
-  "name": "require-review-from-code-owners",
+  "name": "github-app-code-owners-review",
   "description": "GitHub App to require review from Code Owners before merging -- without auto-assignment.",
   "version": "1.0.0",
   "author": "keik <k4t0.kei@gmail.com>",
-  "bugs": "https://github.com/keik/require-review-from-code-owners/issues",
+  "bugs": "https://github.com/keik/github-app-code-owners-review/issues",
   "dependencies": {
     "ignore": "5.1.8",
     "probot": "10.1.0"
@@ -29,7 +29,7 @@
   "engines": {
     "node": ">= 10.13.0"
   },
-  "homepage": "https://github.com/keik/require-review-from-code-owners",
+  "homepage": "https://github.com/keik/github-app-code-owners-review",
   "jest": {
     "testEnvironment": "node"
   },
@@ -40,7 +40,7 @@
   ],
   "license": "MIT",
   "private": true,
-  "repository": "https://github.com/keik/require-review-from-code-owners.git",
+  "repository": "https://github.com/keik/github-app-code-owners-review.git",
   "scripts": {
     "build": "tsc",
     "lint": "eslint . --ext .js,.ts --ignore-pattern lib",

@@ -1,4 +1,4 @@
-# require-review-from-code-owners
+# github-app-code-owners-review
 
 GitHub App to require review from Code Owners before merging -- without auto-assignment.
 
