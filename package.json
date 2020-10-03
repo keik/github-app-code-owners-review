@@ -1,24 +1,9 @@
 {
   "name": "require-review-from-code-owners",
-  "version": "1.0.0",
-  "private": true,
   "description": "GitHub App to require review from Code Owners before merging -- without auto-assignment.",
+  "version": "1.0.0",
   "author": "keik <k4t0.kei@gmail.com>",
-  "license": "MIT",
-  "repository": "https://github.com/keik/require-review-from-code-owners.git",
-  "homepage": "https://github.com/keik/require-review-from-code-owners",
   "bugs": "https://github.com/keik/require-review-from-code-owners/issues",
-  "keywords": [
-    "probot",
-    "github",
-    "probot-app"
-  ],
-  "scripts": {
-    "build": "tsc",
-    "lint": "eslint . --ext .js,.ts --ignore-pattern lib",
-    "start": "probot run ./lib/index.js",
-    "test": "jest"
-  },
   "dependencies": {
     "ignore": "5.1.8",
     "probot": "10.1.0"
@@ -44,7 +29,22 @@
   "engines": {
     "node": ">= 10.13.0"
   },
+  "homepage": "https://github.com/keik/require-review-from-code-owners",
   "jest": {
     "testEnvironment": "node"
+  },
+  "keywords": [
+    "github",
+    "probot",
+    "probot-app"
+  ],
+  "license": "MIT",
+  "private": true,
+  "repository": "https://github.com/keik/require-review-from-code-owners.git",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint . --ext .js,.ts --ignore-pattern lib",
+    "start": "probot run ./lib/index.js",
+    "test": "jest"
   }
 }
