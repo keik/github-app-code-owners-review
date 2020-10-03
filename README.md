@@ -1,26 +1,15 @@
 # require-review-from-code-owners
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that A Probot app
+GitHub App to require review from Code Owners before merging -- without auto-assignment.
 
-## Setup
+## Why
 
-```sh
-# Install dependencies
-npm install
+GitHub original feature "Require review from Code Owners" is great, except auto-assignment.
 
-# Compile
-npm run build
+If Code Owners is set to teams,
 
-# Run
-npm run start
+```
+* @org-name/team-name
 ```
 
-## Contributing
-
-If you have suggestions for how require-review-from-code-owners could be improved, or want to report a bug, open an issue! We'd love all and any contributions.
-
-For more, check out the [Contributing Guide](CONTRIBUTING.md).
-
-## License
-
-[ISC](LICENSE) © 2020 keik <k4t0.kei@gmail.com>
+Pull Request is automatically assigned to the teams so that all team member will subscribe and receive tons of notifications.
