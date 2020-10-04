@@ -4,7 +4,7 @@ GitHub App to require review (approval) from Code Owners before merging -- witho
 
 ## Why
 
-GitHub official feature "Require review from Code Owners" is great, **except auto-assignment to entire *teams**.
+GitHub official feature "Require review from Code Owners" is great, **except auto-assignment to entire teams**.
 
 The problem is that if Code Owners is set to the team like:
 
