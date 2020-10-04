@@ -1,21 +1,27 @@
 # github-app-code-owners-review
 
-GitHub App to require review from Code Owners before merging -- without auto-assignment.
+GitHub App to require review (approval) from Code Owners before merging -- without auto-assignment.
 
 ## Why
 
-GitHub original feature "Require review from Code Owners" is great, except auto-assignment.
+GitHub official feature "Require review from Code Owners" is great, **except auto-assignment to entire *teams**.
 
-If Code Owners is set to teams,
+The problem is that if Code Owners is set to the team like:
 
 ```
 * @org-name/team-name
 ```
 
-Pull Request is automatically assigned to the teams so that all team member will subscribe and receive tons of notifications.
+then when Pull Request is created, Code Owners would be assigned as reviewers automatically. If Code Owners include teams, all the team member will subscribe the PR and receive tons of notifications.
 
 # Settings
 
 Put [CODEOWNERS](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/about-code-owners) file to `${root}/.github` directory.
 
-Note: `${root}/CODEOWNERS` or `docs/CODEOWNERS` are not available.
+If the team has write permission to repository, GitHub will automaticaly assign.
+To avoid this, remove repository from team or apply less permission like read-only.
+
+Incompatible notes:
+
+* `${root}/CODEOWNERS` or `docs/CODEOWNERS` are not available.
+* Cannot refer to a user as Code Owners by email address. Only GitHub username and team name is available.
