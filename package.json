@@ -6,7 +6,8 @@
   "bugs": "https://github.com/keik/github-app-code-owners-review/issues",
   "dependencies": {
     "ignore": "5.1.8",
-    "probot": "10.1.0"
+    "pino-sentry": "0.6.0",
+    "probot": "10.9.0"
   },
   "devDependencies": {
     "@types/jest": "26.0.9",
@@ -44,7 +45,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint . --ext .js,.ts --ignore-pattern lib",
-    "start": "probot run ./lib/index.js",
+    "start": "probot run ./lib/index.js | pino-sentry -d ${SENTRY_DSN_} -l warn",
     "test": "jest"
   }
 }
