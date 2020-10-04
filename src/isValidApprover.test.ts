@@ -1,10 +1,10 @@
-import { _isReviewerContained, isValidReviewer } from "./isValidReviewer";
+import { _isApproverContained, isValidApprover } from "./isValidApprover";
 
 test("when codeownersFileContent is empty, return true", () => {
   expect(
-    isValidReviewer({
+    isValidApprover({
       codeownersFileContent: [].join("\n"),
-      reviewers: ["foo"],
+      approvers: ["foo"],
       filepath: "a/b/c",
       membersByTeams: {},
     })
@@ -13,9 +13,9 @@ test("when codeownersFileContent is empty, return true", () => {
 
 test("when reviewer contain corresponding codeowners, return true", () => {
   expect(
-    isValidReviewer({
+    isValidApprover({
       codeownersFileContent: ["* @foo"].join("\n"),
-      reviewers: ["foo"],
+      approvers: ["foo"],
       filepath: "a/b/c",
       membersByTeams: {},
     })
@@ -23,7 +23,7 @@ test("when reviewer contain corresponding codeowners, return true", () => {
 });
 
 describe("_isReviewerContained", () => {
-  // [patternName, codeowners, reviewers, membersByTeams, expectedResult]
+  // [patternName, codeowners, approvers, membersByTeams, expectedResult]
   const parameters = [
     ["1", [], [], {}, false],
     ["2", ["foo"], [], {}, false],
@@ -35,7 +35,6 @@ describe("_isReviewerContained", () => {
     ["8", ["org/team"], ["foo"], { "org/team": [""] }, false],
     ["9", ["org/team"], ["foo"], { "org/team": ["foo"] }, true],
     ["10", ["org/team"], ["foo"], { "org/team": ["bar"] }, false],
-    ["11", ["org/team"], ["org/team"], {}, true],
   ] as Array<
     [
       string,
@@ -48,9 +47,9 @@ describe("_isReviewerContained", () => {
   parameters.forEach((a) => {
     test(String(a[0]), () => {
       expect(
-        _isReviewerContained({
+        _isApproverContained({
           codeowners: a[1],
-          reviewers: a[2],
+          approvers: a[2],
           membersByTeams: a[3],
         })
       ).toEqual(a[4]);

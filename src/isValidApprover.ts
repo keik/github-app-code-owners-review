@@ -1,13 +1,13 @@
 import { findCodeOwners } from "./findCodeOwners";
 
-export const isValidReviewer = ({
+export const isValidApprover = ({
   codeownersFileContent,
-  reviewers,
+  approvers,
   filepath,
   membersByTeams,
 }: {
   codeownersFileContent: string;
-  reviewers: Array<string>;
+  approvers: Array<string>;
   filepath: string;
   membersByTeams: { [teamName: string]: Array<string> };
 }): boolean => {
@@ -17,25 +17,25 @@ export const isValidReviewer = ({
   });
   if (codeowners.length === 0) return true;
 
-  return _isReviewerContained({ codeowners, reviewers, membersByTeams });
+  return _isApproverContained({ codeowners, approvers, membersByTeams });
 };
 
-export const _isReviewerContained = ({
+export const _isApproverContained = ({
   codeowners,
-  reviewers,
+  approvers,
   membersByTeams,
 }: {
   codeowners: Array<string>;
-  reviewers: Array<string>;
+  approvers: Array<string>;
   membersByTeams: { [teamName: string]: Array<string> };
 }): boolean => {
   return codeowners.some(
     (codeowner) =>
       // single user or team
-      reviewers.includes(codeowner) ||
+      approvers.includes(codeowner) ||
       // team members
       (membersByTeams[codeowner] ?? []).some((codeowner) =>
-        reviewers.includes(codeowner)
+        approvers.includes(codeowner)
       )
   );
 };

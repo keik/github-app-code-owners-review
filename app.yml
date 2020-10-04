@@ -1,5 +1,6 @@
 default_events:
 - pull_request
+- pull_request_review
 
 default_permissions:
   checks: write

@@ -3,7 +3,7 @@ import { Application, Context } from "probot";
 
 import * as RemoteData from "./RemoteData";
 import { findCodeOwners } from "./findCodeOwners";
-import { isValidReviewer } from "./isValidReviewer";
+import { isValidApprover } from "./isValidApprover";
 
 export = (app: Application): void => {
   app.on(
@@ -11,8 +11,9 @@ export = (app: Application): void => {
       "pull_request.opened",
       "pull_request.edited",
       "pull_request.synchronize",
-      "pull_request.review_requested",
-      "pull_request.review_request_removed",
+      "pull_request_review.submitted",
+      "pull_request_review.edited",
+      "pull_request_review.dismissed",
     ],
     check
   );
@@ -30,7 +31,7 @@ const check = async (
   const codeownersFileContent = await RemoteData.getCodeownersFileContent(
     context
   );
-  const reviewers = await RemoteData.getReviewers(context);
+  const approvers = await RemoteData.getApprovers(context);
   const changedFilepaths = await RemoteData.getChangedFilepaths(context);
   const membersByTeams = await RemoteData.getMembersByTeamsFromCodeownersFileContent(
     context,
@@ -39,17 +40,17 @@ const check = async (
 
   // for debug
   // console.log(codeownersFileContent);
-  // console.log(reviewers);
+  // console.log(approvers);
   // console.log(changedFilepaths);
   // console.log(membersByTeams);
 
   const failureMessagesByFilepath: {
     [filepath: string]: string;
   } = changedFilepaths.reduce((acc, filepath) => {
-    return isValidReviewer({
+    return isValidApprover({
       codeownersFileContent,
-      // include author as reviewers because of skipping checking owner for author-owned code.
-      reviewers: [...reviewers, pullRequest.user.login],
+      // include author as approvers because of skipping checking owner for author-owned code.
+      approvers: [...approvers, pullRequest.user.login],
       filepath,
       membersByTeams,
     })

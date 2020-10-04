@@ -27,18 +27,29 @@ export const getChangedFilepaths = async (
   ).data.map((a) => a.filename);
 };
 
-export const getReviewers = async (
+export const getApprovers = async (
   context: Context<EventPayloads.WebhookPayloadPullRequest>
 ): Promise<Array<string>> => {
   const pullRequest = context.payload.pull_request;
-  pullRequest.requested_reviewers;
-  const loginsFromRequestedReviewers = pullRequest.requested_reviewers.map(
-    (reviewer) => reviewer.login
-  );
-  const loginsFromRequestedTeams = pullRequest.requested_teams.map(
-    (team) => `${context.repo().owner}/${team.slug}`
-  );
-  return [...loginsFromRequestedReviewers, ...loginsFromRequestedTeams];
+  const reviews = (
+    await context.github.pulls.listReviews({
+      owner: context.repo().owner,
+      repo: context.repo().repo,
+      pull_number: pullRequest.number,
+    })
+  ).data;
+  const approversWithDuplicate = reviews
+    .sort((a, b) => (a.submitted_at > b.submitted_at ? 1 : -1))
+    .reduce(
+      (acc, review) =>
+        review.state === "APPROVED"
+          ? [...acc, review.user.login]
+          : review.state === "CHANGES_REQUESTED" || review.state === "DISMISSED"
+          ? acc.filter((a) => a !== review.user.login)
+          : acc,
+      [] as Array<string>
+    );
+  return Array.from(new Set(approversWithDuplicate));
 };
 
 export const getMembersByTeamsFromCodeownersFileContent = async (
